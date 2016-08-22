@@ -1,3 +1,7 @@
+import pip
+pip.main(['install','icalendar'])
+pip.main(['install','datetime'])
+pip.main(['install','pytz'])
 
 from icalendar import Calendar, Event, vCalAddress, vText, Timezone, TimezoneStandard, TimezoneDaylight
 from datetime import datetime,timedelta
@@ -12,7 +16,7 @@ gcal.add('prodid', '-//My calendar product//mxm.dk//')
 gcal.add('version','2.0')
 gcal.add('calscale','GREGORIAN')
 gcal.add('method','PUBLISH')
-gcal.add('X-WR-CALNAME','C179')
+gcal.add('X-WR-CALNAME','LyleDistanceF16')
 gcal.add('X-WR-TIMEZONE','America/Chicago')
 tz = Timezone()
 #might need to accomodate for DSaveTime
@@ -81,7 +85,7 @@ for ev3nt in fcal.walk('vevent'):
         print(e)
 
 
-g = open('Testing.ics','wb')
+g = open('LyleDistF16.ics','wb')
 g.write(gcal.to_ical())
 #close the new calendar
 g.close()

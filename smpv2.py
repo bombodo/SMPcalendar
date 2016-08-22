@@ -12,6 +12,8 @@ f = open('TV Operations Schedule Calendar.ics','r')
 print(f)
 fcal = Calendar.from_ical(f.read())
 gcal = Calendar()
+
+#begin setting up preamble stuff
 gcal.add('prodid', '-//My calendar product//mxm.dk//')
 gcal.add('version','2.0')
 gcal.add('calscale','GREGORIAN')
@@ -19,11 +21,12 @@ gcal.add('method','PUBLISH')
 gcal.add('X-WR-CALNAME','LyleDistanceF16')
 gcal.add('X-WR-TIMEZONE','America/Chicago')
 tz = Timezone()
-#might need to accomodate for DSaveTime
+    #might need to accomodate for DSaveTime
 dlt = TimezoneDaylight()
 dlt.add('TZOFFSETFROM',timedelta(hours=-6))
 dlt.add('RRULE',{'FREQ':'YEARLY','BYMONTH':'3','BYDAY':'2SU'})
-dlt['DTSTART']=datetime(2007,03,11,2,0,0)
+#very weird, python 3.5 requires 0o03 instead of 03
+dlt['DTSTART']=datetime(2007,0o03,11,2,0,0)
 dlt.add('TZNAME','CDT')
 dlt.add('TZOFFSETTO',timedelta(hours=-5))
 stnd = TimezoneStandard()
@@ -36,7 +39,7 @@ tz.add('TZID','America/Chicago')
 tz.add_component(dlt)
 tz.add_component(stnd)
 gcal.add_component(tz)
-
+#end setting up preamble stuff
 
 room = {
 ##'J205':'
